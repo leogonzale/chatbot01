@@ -2,23 +2,27 @@ from openai import OpenAI
 
 client = OpenAI()
 
-user_input = input("\nAsk something...\n\n")
+
+user_input = input("\nAsk anything you want...\n\n")
 
 model = "gpt-3.5-turbo"
 
 
-messages = [
+def myquestions(usrquestion):
+
+    messages = [
     {"role": "system", "content": "You are an assistant that always answers in the form of a poem."},
     {"role": "user", "content": user_input}
-]
+    ]
 
 
-
-response = client.chat.completions.create(
+    response = client.chat.completions.create(
     model = model,
     messages = messages
-)
+    )
 
-response_for_user = response.choices[0].message.content
+    response_for_user = response.choices[0].message.content
+    return response_for_user
 
-print("\n" + response_for_user + "\n" )
+
+print("\n" + myquestions(user_input) + "\n" )
